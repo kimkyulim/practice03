@@ -2,6 +2,8 @@ package prob06;
 
 import java.util.Scanner;
 
+import com.sun.javafx.fxml.expression.Expression;
+
 public class CalcApp {
 
 	public static void main(String[] args) {
@@ -16,10 +18,23 @@ public class CalcApp {
 			if( "quit".equals( expression ) ) {
 				break;
 			}
+			
+			String[] tokens = expression.split( " " );
+			int a = Integer.parseInt( tokens[0] );
+			String operator = tokens[1];
+			int b = Integer.parseInt( tokens[2] );
+			
+			switch( operator ) {
+				case "+" : {
+					Add add = new Add();
+					add.setValue( a, b );
+					int result = add.calculate();
+					break;
+				}
+			}
 		}
 		
 		scanner.close();
-
 	}
 
 }
