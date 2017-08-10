@@ -2,39 +2,47 @@ package prob06;
 
 import java.util.Scanner;
 
-import com.sun.javafx.fxml.expression.Expression;
-
 public class CalcApp {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
 		
-		while( true ) {
+		Scanner scanner = new Scanner(System.in);
+		while(true) {
+			System.out.print(">>");
+			String line = scanner.nextLine();
 			
-			/*  코드를 완성 합니다 */
-			System.out.print( ">> " );
-			String expression = scanner.nextLine();
-			
-			if( "quit".equals( expression ) ) {
+			if(line.equals("quit")) {
 				break;
 			}
 			
-			String[] tokens = expression.split( " " );
-			int a = Integer.parseInt( tokens[0] );
-			String operator = tokens[1];
-			int b = Integer.parseInt( tokens[2] );
+			String[] s_line = line.split(" ");
+			int result = 0;
 			
-			switch( operator ) {
-				case "+" : {
-					Add add = new Add();
-					add.setValue( a, b );
-					int result = add.calculate();
-					break;
-				}
+			// 1 -> 기호
+			switch (s_line[1]) {
+			case "+":
+				Add add = new Add();
+				add.setValue(Integer.parseInt(s_line[0]), Integer.parseInt(s_line[2]));
+				result = add.calculate();
+				break;
+			case "-":
+				Sub sub = new Sub();
+				sub.setValue(Integer.parseInt(s_line[0]), Integer.parseInt(s_line[2]));
+				result = sub.calculate();
+				break;
+			case "*":
+				Mul mul = new Mul();
+				mul.setValue(Integer.parseInt(s_line[0]), Integer.parseInt(s_line[2]));
+				result = mul.calculate();
+				break;
+			case "/":
+				Div div = new Div();
+				div.setValue(Integer.parseInt(s_line[0]), Integer.parseInt(s_line[2]));
+				result = div.calculate();
+				break;
 			}
+			
+			System.out.println(result);
 		}
-		
-		scanner.close();
 	}
-
 }
